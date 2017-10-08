@@ -1,0 +1,12 @@
+
+export const GET_LOCAL_DATA = 'GET_LOCAL_DATA';
+export const LOCAL_DATA_SUCCESS = 'LOCAL_DATA_SUCCESS';
+
+export const GET_PRODUCT_DATA = 'GET_PRODUCT_DATA';
+export const PRODUCT_DATA_SUCCESS = 'PRODUCT_DATA_SUCCESS';
+
+export const BID_DATA = 'BID_DATA';
+export const BID_DATA_SUCCESS = 'BID_DATA_SUCCESS'; 
+
+export const GET_BIDS = 'GET_BIDS';
+export const GET_BIDS_SUCCESS = 'GET_BIDS_SUCCESS';

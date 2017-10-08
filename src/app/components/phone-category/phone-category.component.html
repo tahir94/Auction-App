@@ -1,0 +1,114 @@
+<div *ngIf="isCategoryList">
+
+  <div *ngFor="let a of categoryData | async" style="padding : 20px">
+
+    <md-card>
+      <md-list>
+        <md-list-item>
+          <span> <b>Product Name :</b> {{a.productName}} </span>
+        </md-list-item>
+
+        <md-list-item>
+          <span> <b>Posted By    :</b> {{a.userName}} </span>
+        </md-list-item>
+
+        <md-list-item>
+          <span> <b>Bidding Initial Amount:</b> {{a.biddingAmount}}</span>
+        </md-list-item>
+      </md-list>
+      <md-card-actions style="margin : auto">
+        <button md-button color="primary" (click)="viewDetails(a)">View Details</button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</div>
+
+<div *ngIf="isProductDetails$ | async">
+  <div *ngIf="isViewDetails">
+    <button md-icon-button color="accent" (click)="backButton()">
+        <i class="material-icons">arrow_back</i>  
+
+      </button>
+    <md-card>
+      <md-list>
+        <md-list-item>
+          <b>Posted By : </b> {{userDetails.userName}}
+        </md-list-item>
+
+        <md-list-item>
+          <b>Product Name : </b> {{userDetails.productName}}
+        </md-list-item>
+
+        <md-list-item>
+          <b>Product Description : </b> {{userDetails.productDescription}}
+        </md-list-item>
+
+        <md-list-item>
+          <b>Product End Time : </b> {{userDetails.endTime}}
+        </md-list-item>
+
+        <md-list-item>
+          <b>Product End Date : </b> {{userDetails.endDate}}
+        </md-list-item>
+
+        <md-list-item>
+          <b>Product Category : </b> {{userDetails.category}}
+        </md-list-item>
+
+        <md-list-item>
+          <b>Bidding Initial Time : </b> {{userDetails.biddingAmount}}
+        </md-list-item>
+      </md-list>
+    </md-card>
+    <div style="padding : 5px"></div>
+
+    <div *ngIf="userDetails.isBidding == true">
+      <md-card style="height: auto;">
+        <h3>User Bids</h3>
+
+
+        <div *ngFor="let bids of userBids | async">
+          <md-list>
+            <md-list-item><b>User Name :</b>{{bids.biddingBy}}</md-list-item>
+            <md-list-item><b>Bid Amount :</b>{{bids.biddingAmount}}</md-list-item>
+
+          </md-list>
+        </div>
+      </md-card>
+
+      <div style="padding : 5px"></div>
+      <md-card *ngIf="userDetails.uid !== currentUserId">
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Submit Your Bid" type="number" [(ngModel)]="bidAmount">
+        </md-form-field>
+        <md-card-actions>
+          <button md-raised-button color="primary" [disabled]="!bidAmount" (click)="submit(bidAmount,userDetails.uid,userDetails.key)">Submit</button>
+        </md-card-actions>
+
+      </md-card>
+    </div>
+
+    <div *ngIf="userDetails.isBidding == false">
+      <md-card>
+        <b style="color : red">Bidding Time Ended</b>
+        <hr>
+        <md-list>
+          <div style="padding : 1px" *ngFor="let bidBy of highestBidBy;let i = index;let last = last">
+            <div *ngIf="last == true">
+              <b>Awarded To: </b>{{bidBy}}
+            </div>
+          </div>
+          <div style="padding : 1px" *ngFor="let bid of highestBid;let i = index;let last = last">
+            <div *ngIf="last == true">
+              <b>Awarded Price: </b>{{bid}}
+            </div>
+          </div>
+        </md-list>
+      </md-card>
+    </div>
+  </div>
+</div>
+
+<div class="md-spinner-center" *ngIf="isLoading$ | async">
+  <md-spinner></md-spinner>
+</div>

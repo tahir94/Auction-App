@@ -1,0 +1,31 @@
+<md-toolbar>Auction App
+  <span class="example-spacer"></span>
+  <button md-raised-button color="primary" routerLink="/">LOGIN</button>
+</md-toolbar>
+<div style="padding : 5%"></div>
+<md-card class="is-logged-in" *ngIf="isLoggedIn$ | async">
+  <h3 style="text-align : center">SIGNUP</h3>
+  <form style="text-align: center;" class="example-form" [formGroup]="signupForm">
+    <md-form-field class="example-full-width">
+      <input mdInput formControlName="name" placeholder="Type Name">
+      <md-error>This field is required</md-error>
+    </md-form-field>
+    <md-form-field class="example-full-width">
+      <input mdInput formControlName="email" placeholder="Type Email">
+      <md-error>This field is required</md-error>
+    </md-form-field>
+
+    <md-form-field class="example-full-width">
+      <input mdInput formControlName="password" placeholder="Favorite Password">
+      <md-error>This field is required</md-error>
+    </md-form-field>
+
+    <div *ngIf="isError$ | async" style="color : red">
+      {{isError$ | async}}
+    </div>
+    <button md-raised-button color="primary" (click)="submit()" [disabled]="!this.signupForm.valid">submit</button>
+  </form>
+</md-card>
+<div class="loader" *ngIf="isLoading$ | async">
+  <md-spinner></md-spinner>
+</div>

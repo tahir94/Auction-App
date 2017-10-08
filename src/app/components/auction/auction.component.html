@@ -1,0 +1,45 @@
+<div style="padding : 10px">
+</div>
+<md-card style="width : 90%;margin: auto">
+
+  <form class="example-form" [formGroup]="auctionForm">
+    <md-form-field class="example-full-width">
+      <input mdInput formControlName="productName" placeholder="Product Name">
+    </md-form-field>
+
+
+    <md-form-field class="example-full-width">
+      <input mdInput formControlName="productDescription" placeholder="Product Description" value="Sushi">
+    </md-form-field>
+
+
+
+    <!-- date picker -->
+
+    <md-form-field>
+      <input mdInput [mdDatepicker]="picker" [min]="minDate" formControlName="endDate" placeholder="Auction End Date">
+      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+      <md-datepicker #picker></md-datepicker>
+    </md-form-field>
+
+    <!-- time picker -->
+    <md-form-field class="example-full-width">
+      <input formControlName="endTime" mdInput placeholder="Auction End Time" type="time">
+
+    </md-form-field>
+
+    <md-select formControlName="category" placeholder="Select Category">
+      <md-option *ngFor="let category of categories" [value]="category.value">
+        {{ category.viewValue }}
+      </md-option>
+    </md-select>
+
+
+
+    <md-form-field class="example-full-width">
+      <input formControlName="biddingAmount" mdInput placeholder="Initial Bidding Amount" type="number" value="Sushi">
+    </md-form-field>
+    <button md-raised-button color="primary" (click)="submit()" [disabled]="!this.auctionForm.valid">Submit</button>
+  </form>
+
+</md-card>
