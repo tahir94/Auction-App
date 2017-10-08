@@ -37,7 +37,6 @@ export class PhoneCategoryComponent implements OnInit {
     private afAuth: AngularFireAuth) {
       this.highestBidBy$.subscribe((data) => {
         if (data !== null) {
-          console.log(data);
          
           this.highestBidBy = data
         }
@@ -45,7 +44,6 @@ export class PhoneCategoryComponent implements OnInit {
       })
       this.highestBid$.subscribe((data) => {
         if (data !== null) {
-          console.log(data);
           this.highestBid = data
         }
   

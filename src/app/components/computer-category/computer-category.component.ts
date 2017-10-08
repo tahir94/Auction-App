@@ -37,15 +37,13 @@ export class ComputerCategoryComponent implements OnInit {
 
 		this.highestBidBy$.subscribe((data) => {
 			if (data !== null) {
-				console.log(data);
 				this.highestBidBy = data;
 				
 			}
 
 		})
 		this.highestBid$.subscribe((data) => {
-			if (data !== null) {
-				console.log(data);				
+			if (data !== null) {			
 				this.highestBid = data
 			}
 
